@@ -7,7 +7,7 @@ import profile from "../assets/images/rider.jpg"
 const Layout = () => {
     return (
         <Stack>
-            <Stack.Screen name='(tabs)/index'
+            <Stack.Screen name='(tabs)'
                 options={{
                     headerLeft: () => (
                         <Image source={profile} style={{ width: 30, height: 30, borderRadius: 20 }} />
@@ -24,7 +24,7 @@ const Layout = () => {
                     ),
                 }} />
 
-            <Stack.Screen name='details' options={{ headerTitle: "Details" }} />
+            <Stack.Screen name='details' options={{ headerTitle: "Details", headerBackTitle: "Back" }} />
 
         </Stack>
     )
