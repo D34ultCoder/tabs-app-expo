@@ -1,39 +1,33 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import React from 'react'
+import { Stack } from 'expo-router'
+import { Image } from 'react-native'
+import { Ionicons } from '@expo/vector-icons';
+import profile from "../assets/images/rider.jpg"
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+const Layout = () => {
+    return (
+        <Stack>
+            <Stack.Screen name='(tabs)/index'
+                options={{
+                    headerLeft: () => (
+                        <Image source={profile} style={{ width: 30, height: 30, borderRadius: 20 }} />
+                    ),
+                    headerRight: () => <Ionicons name="settings-outline" size={20} color="black" />,
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+                    headerTitle: () => (
+                        <Image
+                            source={{
+                                uri: 'https://upload.wikimedia.org/wikipedia/commons/2/26/X_logo_2023.png', // Example URL for the X logo
+                            }}
+                            style={{ width: 30, height: 30, borderRadius: 20 }}
+                        />
+                    ),
+                }} />
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
+            <Stack.Screen name='details' options={{ headerTitle: "Details" }} />
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
+        </Stack>
+    )
 }
+
+export default Layout
